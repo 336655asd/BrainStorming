@@ -63,12 +63,13 @@ public class setScore extends HttpServlet {
                 response.getWriter().write("nullExist");;
                 return;
             }
+            //保存数据到cookies
             String score=request.getParameter("score");
             Cookie cookie1 = new Cookie("score",""+score);
             cookie1.setMaxAge(60*60*24);
             response.addCookie(cookie1);
             
-            
+            //连接数据库
             String DBDRIVER="com.mysql.jdbc.Driver";
             String DBURL="jdbc:mysql://47.96.162.8:3306/AS?useUnicode=true&characterEncoding=utf-8";
             String DBUSER="Wangnima";

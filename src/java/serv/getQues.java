@@ -19,12 +19,13 @@ import net.sf.json.JSONObject;
  * @author lee
  */
 public class getQues {
+    //单个题目生成
     static public Ques myques[];
     public int numofQues=0;
     public int QuesNo;
     public boolean setQues() throws FileNotFoundException, IOException
     {
-        InputStreamReader reader = new InputStreamReader(new FileInputStream("C:\\Questions.txt")); // 建立一个输入流对象reader  
+        InputStreamReader reader = new InputStreamReader(new FileInputStream("C:\\brain_storm\\Questions.txt")); // 建立一个输入流对象reader  
         BufferedReader br = new BufferedReader(reader); // 建立一个对象，它把文件内容转成计算机能读懂的语言  
         String line = "";  
         String str="";
@@ -32,6 +33,7 @@ public class getQues {
             line = br.readLine();
             str+=line+"\n";
         }while(line != null);
+        //所有的题目数据
         String jsondata[]=str.split("\n");
         this.numofQues=jsondata.length-1;
         myques=new Ques[numofQues];
@@ -39,7 +41,7 @@ public class getQues {
         {
             for(int i=0;i<numofQues;i++)
             {
-
+                    //java中的json使用
                     JSONObject jsonObject =JSONObject.fromObject(jsondata[i]);
                     String title=jsonObject.getString("title");
                     String classes=jsonObject.getString("classes");
@@ -48,7 +50,8 @@ public class getQues {
                     String optionC=jsonObject.getString("optionC");
                     String optionD=jsonObject.getString("optionD");
                     String user=jsonObject.getString("user");
-                    myques[i]=new Ques(title,classes,optionA,optionB,optionC,optionD,user);
+                    //题目构造
+                    myques[i]=new Ques(title,classes,optionA,optionB,optionC,optionD,user,true);
             }
         }
         else
@@ -64,6 +67,7 @@ public class getQues {
         {
             Random ra=new Random();
             this.QuesNo=ra.nextInt(this.numofQues);
+            //以‘##’组合成字符串,并在目的地解析
             String str=myques[QuesNo].title+"##"+
                 myques[QuesNo].classes+"##"+
                 myques[QuesNo].optionA.option+"##"+
@@ -94,11 +98,17 @@ class Ques{
     public Ques()
     {
     }
-    public Ques(String title,String classes,String A,String B,String C,String D,String user){
+    public Ques(String title,String classes,String A,String B,String C,String D,String user,boolean flag){
         this.title=title;
         this.classes=classes;
+        int num=1;
+        if (flag==true)
+        {
         Random ra=new Random();
-        int num=(ra.nextInt(4)+1);
+        num=(ra.nextInt(4)+1);
+        }
+
+        //打乱顺序
         switch(num)
         {
             case 1:
