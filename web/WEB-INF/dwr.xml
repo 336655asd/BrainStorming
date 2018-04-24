@@ -7,8 +7,14 @@
     <create creator="new" javascript="getQues">
       <param name="class" value="serv.getQues"/>
     </create>
-    <create creator="new" javascript="getUserImg">
-      <param name="class" value="serv.getUserImg"/>
+    <create creator="new" javascript="examineQ">
+      <param name="class" value="serv.examineQ"/>
+      </create>
+    <create creator="new" javascript="message_center">
+      <param name="class" value="serv.message_center"/>
+      </create>
+    <create creator="new" javascript="dwr_interface">
+      <param name="class" value="serv.dwr_interface"/>
     </create>
   </allow>
 </dwr>

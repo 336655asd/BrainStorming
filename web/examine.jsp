@@ -1,26 +1,20 @@
 <%-- 
-    Document   : Start
-    Created on : 2018-4-6, 22:56:44
-    Author     : lee
+    Document   : examine
+    Created on : 2018-4-19, 21:46:34
+    Author     : C
 --%>
-<%@ page language="java" import="java.util.*,java.sql.*,java.net.*"%> 
+
+<%@page import="java.net.URLDecoder"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
-<script>
-        var numofCorrect=0;//回答正确的题数
-        var score=0;//玩家总分
-        var username;//玩家名
-        var correctAns;
-        var canClick=true;
-</script>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <script src='<%=request.getContextPath()%>/dwr/engine.js'></script>
-        <script src='<%=request.getContextPath()%>/dwr/interface/getQues.js'></script>
+        <script src='<%=request.getContextPath()%>/dwr/interface/examineQ.js'></script>
         <script type='text/javascript' src='<%=request.getContextPath()%>/dwr/util.js'></script>
-        
-        <script type="text/javascript" src="js/Start.js"></script>
+        <!--调用DWR-->
+        <script type="text/javascript" src="js/examine.js"></script>
         <link type="text/css" rel="stylesheet" href="css/Start.css" />
         <!--弹出层 开始 -->
 	<link type="text/css" rel="stylesheet" href="css/zdialog.css" />
@@ -29,7 +23,7 @@
 	<!--弹出层 结束 -->
 	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
         
-        <title>头脑风暴</title>
+        <title>审核页面</title>
     </head>
     
     <%
@@ -58,16 +52,27 @@
             }
         }
     %>
-    <!--静态网页框架-->
+        <title>JSP Page</title>
+    </head>
+        <!--静态网页框架-->
     <body onload="AutoLoad()" onresize="changeWindowAuto()">
         <div id="gameDiv" class="absol">
-            <div id="score" class="absol">0</div>
+            <button id="score" class="absol" onclick="save()">
+                <img id="save_img" style="width: 80px;height: 80px" src="images/eglass-save.png"> </img>
+            </button>
+            <button id="examine_img_bt_p" onclick="click_pass()">
+            <img id="examine_img_div" class="examine_img_class" style="width: 60px;height: 60px" src="images/pass.png">
+            </button>
+             <button id="examine_img_bt_up" onclick="click_unpass()">
+            <img id="examine_img_div" class="examine_img_class" style="width: 60px;height: 60px" src="images/unpass.png">
+            </button>
+            
             <div id="title" class="absol"></div>
             <div id="classes" class="absol">类别：天文</div>
-            <button id="optA" class="absol button" onclick="clickA()">选项A</button>
-            <button id="optB" class="absol button" onclick="clickB()">选项B</button>
-            <button id="optC" class="absol button" onclick="clickC()">选项C</button>
-            <button id="optD" class="absol button" onclick="clickD()">选项D</button>
+            <button id="optA" class="absol button" >选项A</button>
+            <button id="optB" class="absol button" >选项B</button>
+            <button id="optC" class="absol button" >选项C</button>
+            <button id="optD" class="absol button" >选项D</button>
             <div id="user" class="absol">内容来源于网络</div>
         </div>
 <script>
@@ -75,10 +80,12 @@
 (function(){
     username = '<%= username %>';
     score = <%= score %>;
-    
+
     if( username !== "null")
     {
-        getQues.getOneQues(callBack);
+        alert("hello");
+        examineQ.LoadOneQues(callBack);
+        
     }
     else
     {

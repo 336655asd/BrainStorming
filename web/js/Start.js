@@ -9,15 +9,15 @@ function AutoLoad(){
 }
 
 function changeWindowAuto(){
-	var width=$(document).width();
-	var height=$(document).height();
+	var width=$(document.body).width();
+	var height=$(window).height();
 	var panelwidth;
 	if(width<360)
 	{
             panelwidth=width;
             $("#gameDiv").css({
 		"width":width,
-		"height":"636px",
+		"height":height,
 		"top":"0px",
 		"left":"0px"
             });
@@ -26,13 +26,7 @@ function changeWindowAuto(){
 	{
             panelwidth=360;
             var left=(width-360)/2;
-            var top;
-            if(height<636){
-                top="0px";
-            }
-            else{
-                top =(height-636)/2;
-            }
+            var top =(height-636)/2;
             $("#gameDiv").css({
                 "width":"360px",
                 "height":"636px",
@@ -105,6 +99,7 @@ function alerts()
 	$.DialogByZ.Close();
 }
 
+//一个问题列表结构：[问题，类型，A,B,C,D，作者，答案]
 function callBack(data)
 {
     var myques=data;
@@ -266,12 +261,14 @@ function clickD()
 function whenURGG()
 {
     score+=numofCorrect;
+    //请求setScore（score）
     $.get("setScore?score="+score, function(result){
        if(result == 'nullExist') {
            //result就是servlet返回的数据
            $.DialogByZ.Alert({Title:"提示",Content:"登录信息失效，请重新登录！",BtnL:"确认",FunL:alertsTologin});
        }
        else if(result == 'success'){
+           //传值
            $(window).attr('location','GameOver.jsp?score='+numofCorrect);
        }
        else if(result == 'fail'){
@@ -279,3 +276,4 @@ function whenURGG()
        }
     },"text");//可根据需要选用不同数据类型
 }
+

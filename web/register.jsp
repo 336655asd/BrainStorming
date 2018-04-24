@@ -77,7 +77,7 @@ String getReturn="null";
 			<div id="logo" class="absol">
 				<img src="images/logo.jpg">
 			</div>
-			
+			<!-- 通过onsubmit return flag-->
 			<form action = "register" method = "post" onsubmit = "return validate()"> 
 			
 				<input type="text" id="username" name="username" placeholder="账号" class="absol" maxlength=11>
@@ -96,6 +96,7 @@ String getReturn="null";
     {
         if(username==="0")
 	{
+            //jquery提示框
             $.DialogByZ.Alert({Title:"提示",Content:"注册成功，正在跳转到登录页面！",BtnL:"确认",FunL:alerts_tologin});
 	}
         else if(username==="1")

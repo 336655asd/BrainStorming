@@ -7,16 +7,17 @@ function AutoLoad(){
 	changeWindowAuto();
 }
 
+//窗口设置
 function changeWindowAuto(){
-	var width=$(document).width();
-	var height=$(document).height();
+	var width=$(document.body).width();
+	var height=$(window).height();
 	var panelwidth;
 	if(width<360)
 	{
             panelwidth=width;
             $("#loginDiv").css({
 		"width":width,
-		"height":"636px",
+		"height":height,
 		"top":"0px",
 		"left":"0px"
             });
@@ -25,18 +26,12 @@ function changeWindowAuto(){
 	{
             panelwidth=360;
             var left=(width-360)/2;
-            var top;
-            if(height<636){
-                top="0px";
-            }
-            else{
-                top = (height-636)/2;
-            }
+            var top =(height-636)/2;
             $("#loginDiv").css({
                 "width":"360px",
                 "height":"636px",
-                "top":top,
-                "left":left
+                "top":top+"px",
+                "left":left+"px"
             });
 	}
         $("#userDetails").css({
@@ -63,10 +58,6 @@ function changeWindowAuto(){
 		"left":panelwidth*0.2138889,
 		"top":panelwidth*0.308333
 	});
-        $("#getHb").css({
-		"left":panelwidth*0.2138889,
-		"top":panelwidth*0.55
-	});
         $("#userimg").css({
 		"left":panelwidth*0.069444,
 		"top":panelwidth*0.069444,
@@ -90,26 +81,13 @@ function changeWindowAuto(){
 	});
 }
 
-function callBack(data)
-{
-    if(data !== "null")
-    {
-        $("#touxiang").attr("src",data);
-    }
-}
-
-function alertsBack()
+function alerts()
 {
 	$.DialogByZ.Close();
         $(window).attr('location','login.jsp');
 }
 
-function alerts()
-{
-	$.DialogByZ.Close();
-}
-
-
+//开始游戏
 var animateButtonStart = function(e) {
 
   e.preventDefault;
@@ -127,6 +105,7 @@ var animateButtonInsertNewQues = function(e) {
 
   e.preventDefault;
   //reset animation
+  //移除和添加class，可用来修改显示
   e.target.classList.remove('animate');
   
   e.target.classList.add('animate');
@@ -136,8 +115,9 @@ var animateButtonInsertNewQues = function(e) {
   },700);
 };
 
+//反馈问题
 var animateButtonSendReport = function(e) {
-
+//e=window.event||e
   e.preventDefault;
   //reset animation
   e.target.classList.remove('animate');
@@ -145,20 +125,31 @@ var animateButtonSendReport = function(e) {
   e.target.classList.add('animate');
   setTimeout(function(){
     e.target.classList.remove('animate');
-    $(window).attr('location','feedback.jsp');
   },700);
 };
 
-var animateButtonGetHb = function(e) {
+//添加事件监听
+//根据元素id
 
-  e.preventDefault;
-  //reset animation
-  e.target.classList.remove('animate');
-  
-  e.target.classList.add('animate');
-  setTimeout(function(){
-    e.target.classList.remove('animate');
-    $(window).attr('location','alipay.html');
-  },700);
-};
+var start = document.getElementById("start");
+start.addEventListener('click',animateButtonStart,false);
 
+var newQues = document.getElementById("newQues");
+newQues.addEventListener('click',animateButtonInsertNewQues,false);
+
+var sendReport = document.getElementById("sendReport");
+sendReport.addEventListener('click',animateButtonSendReport,false);
+
+function clickMessage()
+{
+    if (canClick)
+    {
+        canClick=false;
+    }
+    setTimeout("message.jsp",200);
+}
+
+function call_back()
+{
+    alert("跳转");
+}

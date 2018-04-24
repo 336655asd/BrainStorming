@@ -8,15 +8,15 @@ function AutoLoad(){
 }
 
 function changeWindowAuto(){
-	var width=$(document).width();
-	var height=$(document).height();
+	var width=$(document.body).width();
+	var height=$(window).height();
 	var panelwidth;
 	if(width<360)
 	{
             panelwidth=width;
             $("#loginDiv").css({
 		"width":width,
-		"height":"636px",
+		"height":height,
 		"top":"0px",
 		"left":"0px"
             });
@@ -25,13 +25,7 @@ function changeWindowAuto(){
 	{
             panelwidth=360;
                 var left=(width-360)/2;
-                var top;
-                if(height<636){
-                    top="0px";
-                }
-                else{
-                    top =(height-636)/2;
-                }
+                var top =(height-636)/2;
                 $("#loginDiv").css({
                     "width":"360px",
                     "height":"636px",
