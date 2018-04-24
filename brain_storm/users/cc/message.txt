@@ -1,0 +1,4 @@
+{"receiver":"cc","sender":"auditor","infomation":"您的问题c已经审核通过，感谢配合！","type":"examineQ_notice","read":"false"}
+{"receiver":"cc","sender":"auditor","infomation":"您的问题a已经审核通过，感谢配合！","type":"examineQ_notice","read":"false"}
+{"receiver":"cc","sender":"auditor","infomation":"您的问题<c>已经审核通过，感谢配合！","type":"examineQ_notice","read":"false"}
+{"receiver":"cc","sender":"auditor","infomation":"您的问题<a>已经审核通过，感谢配合！","type":"examineQ_notice","read":"false"}
